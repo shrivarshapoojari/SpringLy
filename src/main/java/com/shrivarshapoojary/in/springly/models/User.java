@@ -1,11 +1,7 @@
 package com.shrivarshapoojary.in.springly.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 
 @Entity
@@ -13,8 +9,8 @@ import org.springframework.data.annotation.Id;
 @Table(name="users")
 public class User {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private  Long id;
     private String email;
     private String username;
