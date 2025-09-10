@@ -1,6 +1,7 @@
 package com.shrivarshapoojary.in.springly.security.jwt;
 
 import com.shrivarshapoojary.in.springly.service.UserDetailsImpl;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -63,7 +64,13 @@ public class JwtUtils {
 
     public boolean validateToken(String authToken)
     {
-        Jwts.parser().verifyWith((SecretKey) key())
-                .build().parseSignedClaims(authToken);
+        try {
+            Jwts.parser().verifyWith((SecretKey) key())
+                    .build().parseSignedClaims(authToken);
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
+
+        return true;
     }
 }
