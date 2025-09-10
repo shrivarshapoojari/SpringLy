@@ -1,10 +1,12 @@
 package com.shrivarshapoojary.in.springly.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.Set;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegisterRequest {
 
     private String username;
