@@ -1,5 +1,6 @@
 package com.shrivarshapoojary.in.springly.controller;
 
+import com.shrivarshapoojary.in.springly.dto.LoginRequest;
 import com.shrivarshapoojary.in.springly.dto.RegisterRequest;
 import com.shrivarshapoojary.in.springly.models.User;
 import com.shrivarshapoojary.in.springly.service.UserService;
@@ -31,5 +32,14 @@ public class AuthController {
         userService.registerUser(user);
 
         return ResponseEntity.ok("User registered successfully");
+    }
+
+    @PostMapping("/public/login")
+    public  ResponseEntity<?> login (@RequestBody LoginRequest req)
+    {
+
+
+        return  ResponseEntity.ok( userService.login(req));
+
     }
 }
