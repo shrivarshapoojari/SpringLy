@@ -45,4 +45,10 @@ public class UserService {
         return new JwtAuthenticationResponse(jwt);
 
     }
+
+    public  User findByUsername(String name) throws Exception {
+
+         return  userRepository.findByUsername(name).orElseThrow(()->new Exception( "User not found"));
+
+    }
 }
