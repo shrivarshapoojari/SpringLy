@@ -9,6 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -30,11 +33,17 @@ public class UrlMappingService {
 
         UrlMapping savedMapping=urlMappingRepository.save(urlMapping);
 
-        return converToDto(savedMapping);
+        return convertToDto(savedMapping);
 
 
     }
-    private UrlMappingDto converToDto(UrlMapping urlMapping)
+
+
+
+
+
+
+    private UrlMappingDto convertToDto(UrlMapping urlMapping)
     {
         UrlMappingDto urlMappingDto=new UrlMappingDto();
         urlMappingDto.setOriginaUrl(urlMapping.getOriginalUrl());
@@ -43,10 +52,26 @@ public class UrlMappingService {
         urlMappingDto.setUsername(urlMapping.getUser().getUsername());
         urlMappingDto.setCreatedDate(urlMapping.getCreatedDate());
         urlMappingDto.setClickCount(urlMapping.getClickCount());
-        return  urlMappingDto
+        return  urlMappingDto;
     }
 
     private String generateShortUrl() {
-        return null;
+        Random random=new Random();
+        StringBuilder shortUrl=new StringBuilder(8);
+
+        String characters="ABCDEFGEHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        for(int i=0;i<8;i++)
+        {
+            shortUrl.append(characters.charAt(random.nextInt(characters.length()-1)));
+        }
+
+        return  shortUrl.toString();
+
+    }
+
+
+    public List<UrlMappingDto> gerUrlsByUser(User user) {
+
+        return urlMappingRepository.findByUser(user).stream().map(this::convertToDto).collect(Collectors.toUnmodifiableList());
     }
 }

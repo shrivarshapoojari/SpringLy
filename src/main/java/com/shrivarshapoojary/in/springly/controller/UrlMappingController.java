@@ -1,6 +1,7 @@
 package com.shrivarshapoojary.in.springly.controller;
 
 import com.shrivarshapoojary.in.springly.dto.UrlMappingDto;
+import com.shrivarshapoojary.in.springly.models.UrlMapping;
 import com.shrivarshapoojary.in.springly.models.User;
 import com.shrivarshapoojary.in.springly.service.UrlMappingService;
 import com.shrivarshapoojary.in.springly.service.UserService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,8 +25,8 @@ public class UrlMappingController {
     private UrlMappingService urlMappingService;
     private UserService userService;
 
-    @PostMapping("shroturl")
-    @PreAuthorize("hasRole('USER)")
+    @PostMapping("shorturl")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<UrlMappingDto> createShortUrl(
             @RequestBody Map<String,String> req,
             Principal principal
@@ -39,4 +41,10 @@ public class UrlMappingController {
 
 
     }
+   public ResponseEntity<List<UrlMappingDto>> gerUserUrls(Principal principal) throws Exception {
+       User user =userService.findByUsername(principal.getName());
+
+       return  ResponseEntity.ok(urlMappingService.gerUrlsByUser(user));
+   }
 }
+
