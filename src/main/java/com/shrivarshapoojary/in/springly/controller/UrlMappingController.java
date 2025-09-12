@@ -62,7 +62,7 @@ public class UrlMappingController {
        DateTimeFormatter formatter=DateTimeFormatter.ISO_LOCAL_DATE_TIME;
        LocalDateTime start=LocalDateTime.parse(startDate,formatter);
        LocalDateTime end=LocalDateTime.parse(endDate,formatter);
-       return ResponseEntity.ok(urlMappingService.getClickEventsByDate());
+       return ResponseEntity.ok(urlMappingService.getClickEventsByDate(shortUrl,start,end));
 
    }
 }
