@@ -1,6 +1,7 @@
 package com.shrivarshapoojary.in.springly.service;
 
 
+import com.shrivarshapoojary.in.springly.dto.ClickEventDto;
 import com.shrivarshapoojary.in.springly.dto.UrlMappingDto;
 import com.shrivarshapoojary.in.springly.models.UrlMapping;
 import com.shrivarshapoojary.in.springly.models.User;
@@ -73,5 +74,10 @@ public class UrlMappingService {
     public List<UrlMappingDto> gerUrlsByUser(User user) {
 
         return urlMappingRepository.findByUser(user).stream().map(this::convertToDto).collect(Collectors.toUnmodifiableList());
+    }
+
+    public List<ClickEventDto> getClickEventsByDate() {
+
+        return  null;
     }
 }
