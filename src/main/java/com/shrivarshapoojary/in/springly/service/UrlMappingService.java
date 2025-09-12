@@ -28,6 +28,10 @@ public class UrlMappingService {
 
     public UrlMappingDto createShortUrl(String originalUrl, User user) {
 
+        // Ensure the URL has a proper protocol
+        if (!originalUrl.startsWith("http://") && !originalUrl.startsWith("https://")) {
+            originalUrl = "https://" + originalUrl;
+        }
 
         String shortUrl=generateShortUrl();
 
